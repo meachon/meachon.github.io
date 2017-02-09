@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2 Putty命令行工具使用 &mdash; example 1.0.0 文档</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="example 1.0.0 文档" href="index.html" />
+    <link rel="next" title="3 SNV工具使用" href="svn_cmdline.html" />
+    <link rel="prev" title="1 reStructuredText入门" href="rest_study.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="putty">
+<h1>2 Putty命令行工具使用<a class="headerlink" href="#putty" title="永久链接至标题">¶</a></h1>
+<div class="section" id="plink">
+<h2>2.1 plink执行远程命令<a class="headerlink" href="#plink" title="永久链接至标题">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">使用秘钥方式执行命令</p>
+<blockquote>
+<div><p>运行puttygen.exe生成秘钥，在远程Linux系统执行创建.ssh:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">./</span><span class="n">ssh</span>
+</pre></div>
+</div>
+<p>然后把putty工具当前目录下的authorized_keys文件上传到Linux系统/root/.ssh/目录下。
+直接登录并远程执行命令：</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">plink</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span> <span class="o">-</span><span class="n">i</span> <span class="n">key</span><span class="o">.</span><span class="n">ppk</span> <span class="s1">&#39;pwd&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>用户名密码方式执行命令</dt>
+<dd><p class="first">直接用命令密码形式远程执行命令：</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">plink</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span> <span class="o">-</span><span class="n">pw</span> <span class="n">root</span>  <span class="s1">&#39;pwd&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="pscp">
+<h2>2.2 pscp拷贝文件<a class="headerlink" href="#pscp" title="永久链接至标题">¶</a></h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>从本机往远程主机拷贝</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">pscp</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">pw</span> <span class="n">root</span> <span class="o">-</span><span class="n">agent</span> <span class="n">ReadMe</span><span class="o">.</span><span class="n">rst</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span><span class="p">:</span><span class="o">/</span><span class="n">root</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>从远程主机拷到本地</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">pscp</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">pw</span> <span class="n">root</span> <span class="o">-</span><span class="n">agent</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ReadMe</span><span class="o">.</span><span class="n">rst</span> <span class="o">.</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>使用秘钥拷贝文件</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">pscp</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">i</span> <span class="n">key</span><span class="o">.</span><span class="n">ppk</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">ReadMe</span><span class="o">.</span><span class="n">rst</span> <span class="o">.</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>把本地目录拷贝到远程主机</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">pscp</span> <span class="o">-</span><span class="n">i</span> <span class="n">key</span><span class="o">.</span><span class="n">ppk</span> <span class="o">-</span><span class="n">r</span> <span class="o">.</span><span class="n">ssh</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="o">/</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>拷贝远程主机目录到本地</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="n">pscp</span> <span class="o">-</span><span class="n">i</span> <span class="n">key</span><span class="o">.</span><span class="n">ppk</span> <span class="o">-</span><span class="n">r</span> <span class="n">root</span><span class="nd">@10</span><span class="o">.</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">11</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="o">/.</span><span class="n">ssh</span> <span class="o">.</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">內容目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2 Putty命令行工具使用</a><ul>
+<li><a class="reference internal" href="#plink">2.1 plink执行远程命令</a></li>
+<li><a class="reference internal" href="#pscp">2.2 pscp拷贝文件</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="rest_study.html" title="上一章">1 reStructuredText入门</a></li>
+      <li>Next: <a href="svn_cmdline.html" title="下一章">3 SNV工具使用</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/putty_cmdline.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>快速搜索</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="转向" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, xiaogang.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/putty_cmdline.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
