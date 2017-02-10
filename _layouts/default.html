@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+    
+    <div class="page-nav">
+      <h1 class="page-heading">博客目录</h1>
+        {% for category in site.categories %}
+          <h2>{{ category | first }}</h2>
+          <ul class="arc-list">
+            {% for post in category.last %}
+              <div>
+                <a class="nav-post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></a>
+              </div>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+    </div>
+    <div class="page-content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </div>
+
+    {% include footer.html %}
+
+  </body>
+
+</html>
