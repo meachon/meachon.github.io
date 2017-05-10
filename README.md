@@ -1,1 +1,1 @@
-this project is https://meachon.github.io/ web suite sources.
+欢迎访问迷创博客，或许你能找到适合你的技术学习资料。如果有相关内容涉及版权问题，请立即联系yxg.ok@hotmail.com，感谢支持！
