@@ -173,8 +173,12 @@
 }
 .page-nav {
     float: left;
-    margin-left: 32px;
+    width: -webkit-calc((100% - #{$content-width})/2);
+    width:         calc((100% - #{$content-width})/2);
+    margin-left: 30px;
 }
+
+
 
 .page-heading {
     font-size: 20px;
